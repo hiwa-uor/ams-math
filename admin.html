@@ -224,11 +224,42 @@
         </div>
 
         <div id="sec-students" class="admin-section hidden">
-            <div class="selection-card">
-                <h3 class="card-title">بەڕێوەبردنی دۆسیەی خوێندکاران</h3>
-                <p>لێرەدا دەتوانیت بەدوای خوێندکاردا بگەڕێیت، زانیارییەکانی دەستکاری بکەیت، یان بڕیاری (سڕینەوەی ناو، گەڕانەوە، پارالێڵ) بۆ جێبەجێ بکەیت و لینکی فەرمانی زانکۆییەکەی بۆ دابنێیت.</p>
-                </div>
+    <div class="selection-card">
+        <h3 class="card-title"><i class="fa-solid fa-magnifying-glass"></i> گەڕان بەدوای خوێندکار</h3>
+        <div style="display: flex; gap: 10px;">
+            <input type="text" placeholder="بە ژمارەی ئایدی یان ناو بگەڕێ..." style="flex-grow: 1; padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
+            <button class="action-btn bg-blue"><i class="fa-solid fa-search"></i> گەڕان</button>
         </div>
+    </div>
+
+    <div class="selection-card">
+        <h3 class="card-title"><i class="fa-solid fa-user-graduate"></i> دۆسیەی خوێندکار</h3>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: right;">
+                <thead>
+                    <tr style="border-bottom: 2px solid #eee;">
+                        <th style="padding: 12px;">ئایدی</th>
+                        <th style="padding: 12px;">ناو</th>
+                        <th style="padding: 12px;">جۆری وەرگرتن</th>
+                        <th style="padding: 12px;">دۆخی ئێستا</th>
+                        <th style="padding: 12px;">کردارەکان</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 12px;">2019001</td>
+                        <td style="padding: 12px;">ئەحمەد ئازاد</td>
+                        <td style="padding: 12px;">پارالێڵ</td>
+                        <td style="padding: 12px;">چالاک</td>
+                        <td style="padding: 12px;">
+                            <button class="select-btn" style="padding: 5px 10px; font-size: 12px;">دەستکاری</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
         <div id="sec-requests" class="admin-section hidden">
             <div class="selection-card">
