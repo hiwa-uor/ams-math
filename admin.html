@@ -75,7 +75,6 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         
-        /* کارتی هەڵبژاردنەکان (لۆجیکی دوگمەکان) */
         .selection-card {
             background: white;
             padding: 25px;
@@ -98,7 +97,6 @@
             gap: 12px;
         }
         
-        /* دیزاینی دوگمەکان کە جێگەی درۆپ لیست دەگرنەوە */
         .select-btn {
             background-color: #f8f9fa;
             border: 2px solid #e1e4e8;
@@ -123,7 +121,6 @@
         
         .hidden { display: none !important; }
         
-        /* بەشی کردارەکان (دوای هەڵبژاردنی مۆدیول) */
         .action-panel {
             display: flex;
             gap: 15px;
@@ -160,83 +157,123 @@
             <span style="font-size: 13px; color: #cbd5e1;">پۆرتاڵی ئەدمین</span>
         </div>
         <ul class="nav-links">
-            <li class="active"><i class="fa-solid fa-layer-group"></i> بەڕێوەبردنی وانەکان</li>
-            <li><i class="fa-solid fa-users"></i> خوێندکاران</li>
-            <li><i class="fa-solid fa-clipboard-list"></i> داواکارییەکان <span style="background: red; padding: 2px 6px; border-radius: 10px; font-size: 12px; float: left;">٣</span></li>
-            <li><i class="fa-solid fa-chart-line"></i> ڕاپۆرت و دەرچووان</li>
-            <li><i class="fa-solid fa-gear"></i> ڕێکخستنەکان</li>
+            <li class="active" onclick="switchSection('sec-courses', this)"><i class="fa-solid fa-layer-group"></i> بەڕێوەبردنی وانەکان</li>
+            <li onclick="switchSection('sec-students', this)"><i class="fa-solid fa-users"></i> خوێندکاران</li>
+            <li onclick="switchSection('sec-requests', this)"><i class="fa-solid fa-clipboard-list"></i> داواکارییەکان <span style="background: red; padding: 2px 6px; border-radius: 10px; font-size: 12px; float: left;">٣</span></li>
+            <li onclick="switchSection('sec-reports', this)"><i class="fa-solid fa-chart-line"></i> ڕاپۆرت و دەرچووان</li>
+            <li onclick="switchSection('sec-settings', this)"><i class="fa-solid fa-gear"></i> ڕێکخستنەکان</li>
         </ul>
     </div>
 
     <div class="main-content">
         <div class="top-bar">
-            <h2>بەڕێوەبردنی وانەکان و نمرە</h2>
+            <h2 id="page-title">بەڕێوەبردنی وانەکان و نمرە</h2>
             <div>
                 <span style="font-weight: bold; color: #2a5298;">بەخێربێیت، ئەدمین</span>
                 <i class="fa-solid fa-circle-user fa-2x" style="vertical-align: middle; margin-right: 10px; color: #ccc;"></i>
             </div>
         </div>
 
-        <div class="selection-card" id="season-card">
-            <h3 class="card-title"><i class="fa-regular fa-calendar-days"></i> ١. وەرزی خوێندن هەڵبژێرە</h3>
-            <div class="btn-group">
-                <button class="select-btn" onclick="selectSeason(this)">پاییز (٢٠٢٥-٢٠٢٦)</button>
-                <button class="select-btn" onclick="selectSeason(this)">بەهار (٢٠٢٥-٢٠٢٦)</button>
+        <div id="sec-courses" class="admin-section">
+            <div class="selection-card" id="season-card">
+                <h3 class="card-title"><i class="fa-regular fa-calendar-days"></i> ١. وەرزی خوێندن هەڵبژێرە</h3>
+                <div class="btn-group">
+                    <button class="select-btn" onclick="selectSeason(this)">پاییز (٢٠٢٥-٢٠٢٦)</button>
+                    <button class="select-btn" onclick="selectSeason(this)">Spring (2025-2026)</button>
+                </div>
             </div>
-        </div>
 
-        <div class="selection-card hidden" id="stage-card">
-            <h3 class="card-title"><i class="fa-solid fa-stairs"></i> ٢. قۆناغ هەڵبژێرە</h3>
-            <div class="btn-group">
-                <button class="select-btn" onclick="selectStage(this)">قۆناغی یەکەم</button>
-                <button class="select-btn" onclick="selectStage(this)">قۆناغی دووەم</button>
-                <button class="select-btn" onclick="selectStage(this)">قۆناغی سێیەم</button>
-                <button class="select-btn" onclick="selectStage(this)">قۆناغی چوارەم</button>
+            <div class="selection-card hidden" id="stage-card">
+                <h3 class="card-title"><i class="fa-solid fa-stairs"></i> ٢. قۆناغ هەڵبژێرە</h3>
+                <div class="btn-group">
+                    <button class="select-btn" onclick="selectStage(this)">قۆناغی یەکەم</button>
+                    <button class="select-btn" onclick="selectStage(this)">قۆناغی دووەم</button>
+                    <button class="select-btn" onclick="selectStage(this)">قۆناغی سێیەم</button>
+                    <button class="select-btn" onclick="selectStage(this)">قۆناغی چوارەم</button>
+                </div>
             </div>
-        </div>
 
-        <div class="selection-card hidden" id="module-card">
-            <h3 class="card-title"><i class="fa-solid fa-book"></i> ٣. مۆدیول هەڵبژێرە</h3>
-            <div class="btn-group" id="module-buttons">
-                <button class="select-btn" onclick="selectModule(this)">شیکاری ژمارەیی</button>
-                <button class="select-btn" onclick="selectModule(this)">جیاکاری و تەواوکاری پێشکەوتوو</button>
-                <button class="select-btn" onclick="selectModule(this)">شیکاریی ڕاستەقینە</button>
+            <div class="selection-card hidden" id="module-card">
+                <h3 class="card-title"><i class="fa-solid fa-book"></i> ٣. مۆدیول هەڵبژێرە</h3>
+                <div class="btn-group" id="module-buttons">
+                    <button class="select-btn" onclick="selectModule(this)">شیکاری ژمارەیی</button>
+                    <button class="select-btn" onclick="selectModule(this)">جیاکاری و تەواوکاری پێشکەوتوو</button>
+                    <button class="select-btn" onclick="selectModule(this)">شیکاریی ڕاستەقینە</button>
+                </div>
             </div>
-        </div>
 
-        <div class="selection-card hidden" id="action-card">
-            <h3 class="card-title" id="selected-module-title">ناوی مۆدیولەکە</h3>
-            <p style="color: #666; margin-bottom: 20px;">ئێستا دەتوانیت کردارێک بۆ ئەم مۆدیولە ئەنجام بدەیت. لیستی هەموو خوێندکارە تۆمارکراوەکانی ئەم خولە بە یەک جار دەردەکەون.</p>
+            <div class="selection-card hidden" id="action-card">
+                <h3 class="card-title" id="selected-module-title">ناوی مۆدیولەکە</h3>
+                <p style="color: #666; margin-bottom: 20px;">ئێستا دەتوانیت کردارێک بۆ ئەم مۆدیولە ئەنجام بدەیت. لیستی هەموو خوێندکارە تۆمارکراوەکانی ئەم خولە بە یەک جار دەردەکەون.</p>
+                <div class="action-panel">
+                    <button class="action-btn bg-blue"><i class="fa-solid fa-pen-to-square"></i> داخڵکردنی نمرە</button>
+                    <button class="action-btn bg-orange"><i class="fa-solid fa-user-xmark"></i> تۆمارکردنی غیابات</button>
+                    <button class="action-btn bg-green"><i class="fa-solid fa-list-check"></i> لیستی خوێندکاران (ڕۆستەر)</button>
+                </div>
+            </div>
             
-            <div class="action-panel">
-                <button class="action-btn bg-blue"><i class="fa-solid fa-pen-to-square"></i> داخڵکردنی نمرە</button>
-                <button class="action-btn bg-orange"><i class="fa-solid fa-user-xmark"></i> تۆمارکردنی غیابات</button>
-                <button class="action-btn bg-green"><i class="fa-solid fa-list-check"></i> لیستی خوێندکاران (ڕۆستەر)</button>
+            <div class="selection-card" style="margin-top: 30px; border-right: 4px solid #28a745;">
+                <h3 class="card-title"><i class="fa-solid fa-file-excel"></i> داخڵکردنی داتای پێشوو (بە کۆمەڵ)</h3>
+                <p style="color: #666; font-size: 14px; margin-bottom: 20px;">سەرەتا فایلی نموونە دابگرە، زانیارییەکانی ساڵانی پێشووی تێدا ڕێکبخە، پاشان لێرەوە بەرزی بکەرەوە بۆ ناو سیستەمەکە.</p>
+                <div class="action-panel">
+                    <button class="action-btn bg-green" onclick="downloadTemplate()"><i class="fa-solid fa-download"></i> داگرتنی فایلی ئامادە</button>
+                    <input type="file" id="uploadExcel" accept=".csv" style="display: none;" onchange="handleFileUpload(event)">
+                    <button class="action-btn bg-blue" onclick="document.getElementById('uploadExcel').click()"><i class="fa-solid fa-upload"></i> ئەپڵۆدکردنەوەی فایلەکە</button>
+                </div>
             </div>
         </div>
 
-        <div class="selection-card" style="margin-top: 30px; border-right: 4px solid #28a745;">
-            <h3 class="card-title"><i class="fa-solid fa-file-excel"></i> داخڵکردنی داتای پێشوو (بە کۆمەڵ)</h3>
-            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">
-                سەرەتا فایلی نموونە دابگرە، زانیارییەکانی ساڵانی پێشووی تێدا ڕێکبخە، پاشان لێرەوە بەرزی بکەرەوە بۆ ناو سیستەمەکە.
-            </p>
-            
-            <div class="action-panel">
-                <button class="action-btn bg-green" onclick="downloadTemplate()">
-                    <i class="fa-solid fa-download"></i> داگرتنی فایلی ئامادە
-                </button>
-                
-                <input type="file" id="uploadExcel" accept=".csv" style="display: none;" onchange="handleFileUpload(event)">
-                
-                <button class="action-btn bg-blue" onclick="document.getElementById('uploadExcel').click()">
-                    <i class="fa-solid fa-upload"></i> ئەپڵۆدکردنەوەی فایلەکە
-                </button>
+        <div id="sec-students" class="admin-section hidden">
+            <div class="selection-card">
+                <h3 class="card-title">بەڕێوەبردنی دۆسیەی خوێندکاران</h3>
+                <p>لێرەدا دەتوانیت بەدوای خوێندکاردا بگەڕێیت، زانیارییەکانی دەستکاری بکەیت، یان بڕیاری (سڕینەوەی ناو، گەڕانەوە، پارالێڵ) بۆ جێبەجێ بکەیت و لینکی فەرمانی زانکۆییەکەی بۆ دابنێیت.</p>
+                </div>
+        </div>
+
+        <div id="sec-requests" class="admin-section hidden">
+            <div class="selection-card">
+                <h3 class="card-title">داواکارییەکانی خوێندکاران (مۆڵەت، دواخستن)</h3>
+                <p>ئەو داواکارییانەی لێرەدان چاوەڕێی ڕەزامەندیی تۆن. ژمارەی هەوڵەکانی پێشووی خوێندکارەکە لەتەنیشت داواکارییەکە دەردەکەوێت.</p>
+            </div>
+        </div>
+
+        <div id="sec-reports" class="admin-section hidden">
+            <div class="selection-card">
+                <h3 class="card-title">ڕاپۆرتەکان و لیستی دەرچووان</h3>
+                <p>ئەو خوێندکارانەی ٢٤٠ کریدیتیان تەواو کردووە لێرە دەردەکەون، هەروەها دەتوانیت ڕیزبەندی یەکەمەکان لەسەر ئاستی قۆناغ دەربهێنیت.</p>
+            </div>
+        </div>
+
+        <div id="sec-settings" class="admin-section hidden">
+            <div class="selection-card">
+                <h3 class="card-title">ڕێکخستنەکانی سیستەم</h3>
+                <p>لێرەدا دەتوانیت وەرزی نوێ، مۆدیولی نوێ، یان یاساکانی پرۆسەی بۆڵۆنا دەستکاری بکەیت.</p>
             </div>
         </div>
 
     </div>
 
     <script>
+        // فەنکشنی نوێ بۆ گۆڕینی ژوورەکان
+        function switchSection(sectionId, element) {
+            // ١. هەموو ژوورەکان بشارەوە
+            document.querySelectorAll('.admin-section').forEach(sec => sec.classList.add('hidden'));
+            
+            // ٢. ڕەنگی زەرد (active) لەسەر هەموو دوگمەکانی لای ڕاست لابدە
+            document.querySelectorAll('.nav-links li').forEach(li => li.classList.remove('active'));
+            
+            // ٣. ئەو ژوورەی کە دیاریکراوە پیشانی بدە
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // ٤. ڕەنگە زەردەکە بخەرە سەر ئەو دوگمەیەی کە کلیکت لێکردووە
+            element.classList.add('active');
+
+            // ٥. گۆڕینی ناونیشانی سەرەوە
+            const titleText = element.innerText;
+            document.getElementById('page-title').innerText = titleText;
+        }
+
+        // کۆدەکانی پێشوو بۆ بەشی وانەکان
         function resetGroup(containerId) {
             const buttons = document.querySelectorAll(`#${containerId} .select-btn`);
             buttons.forEach(btn => btn.classList.remove('active'));
@@ -266,7 +303,6 @@
             document.getElementById('selected-module-title').innerText = "مۆدیول: " + btn.innerText;
         }
 
-        // فەنکشنی دروستکردن و داونلۆدکردنی فایلی نموونە
         function downloadTemplate() {
             const headers = "Student_ID,Full_Name,Stage,Module_Code,Semester,Attempt_Number,Total_Grade\n";
             const exampleData = "2019001,ئەحمەد ئازاد,قۆناغی یەکەم,MATH101,Spring (2025-2026),1,85\n";
@@ -281,7 +317,6 @@
             document.body.removeChild(link);
         }
 
-        // فەنکشنی کاتی بۆ وەرگرتنی فایلەکە لە کاتی ئەپڵۆدکردندا
         function handleFileUpload(event) {
             const file = event.target.files[0];
             if (file) {
