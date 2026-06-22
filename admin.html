@@ -3,371 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پۆرتاڵی ئەدمین - داشبۆرد</title>
-    
+    <title>پۆرتاڵی ئەدمین - بەشی بیرکاری</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
-    
     <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Vazirmatn', sans-serif;
-        }
-        body {
-            margin: 0;
-            background-color: #f4f7f6;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
-        
-        /* دیزاینی لای ڕاست (Sidebar) */
-        .sidebar {
-            width: 260px;
-            background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-        }
-        .sidebar-header {
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .sidebar-header img {
-            width: 70px;
-            margin-bottom: 10px;
-        }
-        .nav-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            flex-grow: 1;
-        }
-        .nav-links li {
-            padding: 15px 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border-right: 4px solid transparent;
-            font-size: 16px;
-        }
-        .nav-links li:hover, .nav-links li.active {
-            background-color: rgba(255,255,255,0.1);
-            border-right: 4px solid #f39c12;
-        }
-        .nav-links i { margin-left: 10px; width: 20px; }
-        
-        /* دیزاینی ناوەڕاست (Main Content) */
-        .main-content {
-            flex-grow: 1;
-            padding: 30px;
-            overflow-y: auto;
-        }
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            background: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .selection-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-        .card-title {
-            font-size: 18px;
-            color: #333;
-            margin-top: 0;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #f0f2f5;
-            padding-bottom: 10px;
-        }
-        .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-        
-        .select-btn {
-            background-color: #f8f9fa;
-            border: 2px solid #e1e4e8;
-            color: #4a5568;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .select-btn:hover {
-            border-color: #2a5298;
-            background-color: #f0f4f8;
-        }
-        .select-btn.active {
-            background-color: #2a5298;
-            border-color: #2a5298;
-            color: white;
-            box-shadow: 0 4px 10px rgba(42, 82, 152, 0.3);
-        }
-        
+        * { box-sizing: border-box; font-family: 'Vazirmatn', sans-serif; }
+        body { margin: 0; background-color: #f4f7f6; display: flex; height: 100vh; overflow: hidden; }
+        .sidebar { width: 260px; background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%); color: white; display: flex; flex-direction: column; }
+        .sidebar-header { padding: 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-links { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+        .nav-links li { padding: 15px 20px; cursor: pointer; border-right: 4px solid transparent; }
+        .nav-links li:hover, .nav-links li.active { background-color: rgba(255,255,255,0.1); border-right: 4px solid #f39c12; }
+        .main-content { flex-grow: 1; padding: 30px; overflow-y: auto; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; background: white; padding: 15px 25px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .selection-card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .card-title { font-size: 18px; color: #333; margin: 0 0 20px 0; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px; }
+        .btn-group { display: flex; flex-wrap: wrap; gap: 12px; }
+        .select-btn { background-color: #f8f9fa; border: 2px solid #e1e4e8; padding: 12px 24px; border-radius: 8px; cursor: pointer; }
+        .select-btn.active { background-color: #2a5298; color: white; }
         .hidden { display: none !important; }
-        
-        .action-panel {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .action-btn {
-            padding: 15px 25px;
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.2s;
-        }
+        .action-btn { padding: 12px 20px; border: none; border-radius: 6px; color: white; cursor: pointer; font-weight: 600; }
         .bg-blue { background-color: #007bff; }
-        .bg-blue:hover { background-color: #0056b3; }
-        .bg-green { background-color: #28a745; }
-        .bg-green:hover { background-color: #1e7e34; }
-        .bg-orange { background-color: #fd7e14; }
-        .bg-orange:hover { background-color: #e86e04; }
-        
+        input, select { padding: 10px; border: 1px solid #ccc; border-radius: 6px; width: 100%; }
+        table { width: 100%; border-collapse: collapse; text-align: right; }
+        th, td { padding: 12px; border-bottom: 1px solid #eee; }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
-        <div class="sidebar-header">
-            <img src="logo.png" alt="لۆگۆ">
-            <h3>بەشی بیرکاری</h3>
-            <span style="font-size: 13px; color: #cbd5e1;">پۆرتاڵی ئەدمین</span>
-        </div>
+        <div class="sidebar-header"><h3>بەشی بیرکاری</h3></div>
         <ul class="nav-links">
             <li class="active" onclick="switchSection('sec-courses', this)"><i class="fa-solid fa-layer-group"></i> بەڕێوەبردنی وانەکان</li>
             <li onclick="switchSection('sec-students', this)"><i class="fa-solid fa-users"></i> خوێندکاران</li>
-            <li onclick="switchSection('sec-requests', this)"><i class="fa-solid fa-clipboard-list"></i> داواکارییەکان <span style="background: red; padding: 2px 6px; border-radius: 10px; font-size: 12px; float: left;">٣</span></li>
+            <li onclick="switchSection('sec-requests', this)"><i class="fa-solid fa-clipboard-list"></i> داواکارییەکان</li>
             <li onclick="switchSection('sec-reports', this)"><i class="fa-solid fa-chart-line"></i> ڕاپۆرت و دەرچووان</li>
             <li onclick="switchSection('sec-settings', this)"><i class="fa-solid fa-gear"></i> ڕێکخستنەکان</li>
         </ul>
     </div>
 
     <div class="main-content">
-        <div class="top-bar">
-            <h2 id="page-title">بەڕێوەبردنی وانەکان و نمرە</h2>
-            <div>
-                <span style="font-weight: bold; color: #2a5298;">بەخێربێیت، ئەدمین</span>
-                <i class="fa-solid fa-circle-user fa-2x" style="vertical-align: middle; margin-right: 10px; color: #ccc;"></i>
-            </div>
-        </div>
+        <div class="top-bar"><h2 id="page-title">بەڕێوەبردنی وانەکان</h2></div>
 
         <div id="sec-courses" class="admin-section">
-            <div class="selection-card" id="season-card">
-                <h3 class="card-title"><i class="fa-regular fa-calendar-days"></i> ١. وەرزی خوێندن هەڵبژێرە</h3>
-                <div class="btn-group">
-                    <button class="select-btn" onclick="selectSeason(this)">Fall (2025-2025)</button>
-                    <button class="select-btn" onclick="selectSeason(this)">Spring (2025-2026)</button>
+            <div class="selection-card">
+                <h3 class="card-title">زیادکردنی وانەی نوێ بۆ کتێبخانە</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <input type="text" placeholder="ناوی وانە">
+                    <input type="text" placeholder="کۆدی وانە">
+                    <input type="number" placeholder="ژمارەی ECTS">
+                    <select><option>Core</option><option>Elective</option><option>University</option></select>
+                    <input type="text" placeholder="تایپی بۆڵۆنا (بۆ نموونە: 2019-Type)">
+                    <input type="text" placeholder="کۆدی پریڕیکوێست">
                 </div>
-            </div>
-
-            <div class="selection-card hidden" id="stage-card">
-                <h3 class="card-title"><i class="fa-solid fa-stairs"></i>قۆناغ هەڵبژێرە</h3>
-                <div class="btn-group">
-                    <button class="select-btn" onclick="selectStage(this)">قۆناغی یەکەم</button>
-                    <button class="select-btn" onclick="selectStage(this)">قۆناغی دووەم</button>
-                    <button class="select-btn" onclick="selectStage(this)">قۆناغی سێیەم</button>
-                    <button class="select-btn" onclick="selectStage(this)">قۆناغی چوارەم</button>
-                </div>
-            </div>
-
-            <div class="selection-card hidden" id="module-card">
-                <h3 class="card-title"><i class="fa-solid fa-book"></i>مۆدیول هەڵبژێرە</h3>
-                <div class="btn-group" id="module-buttons">
-                    <button class="select-btn" onclick="selectModule(this)">شیکاری ژمارەیی</button>
-                    <button class="select-btn" onclick="selectModule(this)">جیاکاری و تەواوکاری پێشکەوتوو</button>
-                    <button class="select-btn" onclick="selectModule(this)">شیکاریی ڕاستەقینە</button>
-                </div>
-            </div>
-
-            <div class="selection-card hidden" id="action-card">
-                <h3 class="card-title" id="selected-module-title">ناوی مۆدیولەکە</h3>
-                <p style="color: #666; margin-bottom: 20px;">ئێستا دەتوانیت کردارێک بۆ ئەم مۆدیولە ئەنجام بدەیت. لیستی هەموو خوێندکارە تۆمارکراوەکانی ئەم خولە بە یەک جار دەردەکەون.</p>
-                <div class="action-panel">
-                    <button class="action-btn bg-blue"><i class="fa-solid fa-pen-to-square"></i> داخڵکردنی نمرە</button>
-                    <button class="action-btn bg-orange"><i class="fa-solid fa-user-xmark"></i> تۆمارکردنی غیابات</button>
-                    <button class="action-btn bg-green"><i class="fa-solid fa-list-check"></i> لیستی خوێندکاران (ڕۆستەر)</button>
-                </div>
-            </div>
-            
-            <div class="selection-card" style="margin-top: 30px; border-right: 4px solid #28a745;">
-                <h3 class="card-title"><i class="fa-solid fa-file-excel"></i> داخڵکردنی داتای پێشوو (بە کۆمەڵ)</h3>
-                <p style="color: #666; font-size: 14px; margin-bottom: 20px;">سەرەتا فایلی نموونە دابگرە، زانیارییەکانی ساڵانی پێشووی تێدا ڕێکبخە، پاشان لێرەوە بەرزی بکەرەوە بۆ ناو سیستەمەکە.</p>
-                <div class="action-panel">
-                    <button class="action-btn bg-green" onclick="downloadTemplate()"><i class="fa-solid fa-download"></i> داگرتنی فایلی ئامادە</button>
-                    <input type="file" id="uploadExcel" accept=".csv" style="display: none;" onchange="handleFileUpload(event)">
-                    <button class="action-btn bg-blue" onclick="document.getElementById('uploadExcel').click()"><i class="fa-solid fa-upload"></i> ئەپڵۆدکردنەوەی فایلەکە</button>
-                </div>
+                <button class="action-btn bg-blue" style="margin-top: 15px;">تۆمارکردن لە کتێبخانە</button>
             </div>
         </div>
 
         <div id="sec-students" class="admin-section hidden">
-    <div class="selection-card">
-        <h3 class="card-title"><i class="fa-solid fa-magnifying-glass"></i> گەڕان بەدوای خوێندکار</h3>
-        <div style="display: flex; gap: 10px;">
-            <input type="text" placeholder="بە ژمارەی ئایدی یان ناو بگەڕێ..." style="flex-grow: 1; padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
-            <button class="action-btn bg-blue"><i class="fa-solid fa-search"></i> گەڕان</button>
+            <div class="selection-card">
+                <h3 class="card-title">لیستی گشتی خوێندکاران</h3>
+                <table>
+                    <thead><tr><th>ئایدی</th><th>ناو</th><th>ئیمەیڵ</th><th>جۆری وەرگرتن</th><th>کردار</th></tr></thead>
+                    <tbody><tr><td>2019001</td><td>ئەحمەد ئازاد</td><td>ahmad@uor.edu.krd</td><td>پارالێڵ</td><td><button class="action-btn bg-blue">دەستکاری</button></td></tr></tbody>
+                </table>
+            </div>
         </div>
-    </div>
-
-    <div class="selection-card">
-        <h3 class="card-title"><i class="fa-solid fa-user-graduate"></i> دۆسیەی خوێندکار</h3>
-        <div style="overflow-x: auto;">
-            <table style="width: 100%; border-collapse: collapse; text-align: right;">
-    <thead>
-        <tr style="border-bottom: 2px solid #eee; background-color: #f8f9fa;">
-            <th style="padding: 12px;">ئایدی</th>
-            <th style="padding: 12px;">ناو</th>
-            <th style="padding: 12px;">ئیمەیڵ</th>
-            <th style="padding: 12px;">جۆری وەرگرتن</th>
-            <th style="padding: 12px;">کردارەکان</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr style="border-bottom: 1px solid #eee;">
-            <td style="padding: 12px;">2019001</td>
-            <td style="padding: 12px;">ئەحمەد ئازاد</td>
-            <td style="padding: 12px;">ahmad@uor.edu.krd</td>
-            <td style="padding: 12px;">پارالێڵ</td>
-            <td style="padding: 12px;">
-                <button class="select-btn" style="padding: 5px 10px; font-size: 12px; background: #2a5298; color: white;">دەستکاری</button>
-            </td>
-        </tr>
-    </tbody>
-</table>       
-        </div>
-    </div>
-</div>
 
         <div id="sec-requests" class="admin-section hidden">
-            <div class="selection-card">
-                <h3 class="card-title">داواکارییەکانی خوێندکاران (مۆڵەت، دواخستن)</h3>
-                <p>ئەو داواکارییانەی لێرەدان چاوەڕێی ڕەزامەندیی تۆن. ژمارەی هەوڵەکانی پێشووی خوێندکارەکە لەتەنیشت داواکارییەکە دەردەکەوێت.</p>
-            </div>
+            <div class="selection-card"><h3>داواکارییەکان (مۆڵەت، دواخستن)</h3></div>
         </div>
 
         <div id="sec-reports" class="admin-section hidden">
+            <div class="selection-card"><h3>ڕاپۆرتی دەرچووان و یەکەمەکان</h3></div>
+        </div>
+
+        <div id="sec-settings" class="admin-section hidden">
             <div class="selection-card">
-                <h3 class="card-title">ڕاپۆرتەکان و لیستی دەرچووان</h3>
-                <p>ئەو خوێندکارانەی ٢٤٠ کریدیتیان تەواو کردووە لێرە دەردەکەون، هەروەها دەتوانیت ڕیزبەندی یەکەمەکان لەسەر ئاستی قۆناغ دەربهێنیت.</p>
+                <h3>زیادکردنی مامۆستا</h3>
+                <input type="text" placeholder="ناوی مامۆستا">
+                <button class="action-btn bg-blue" style="margin-top: 10px;">تۆمارکردن</button>
             </div>
         </div>
-
- <div id="sec-settings" class="admin-section hidden">
-    
-    <div class="selection-card">
-        <h3 class="card-title"><i class="fa-solid fa-user-plus"></i> زیادکردنی مامۆستای نوێ</h3>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-            <input type="text" placeholder="ناوی تەواوی مامۆستا" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
-            <input type="email" placeholder="ئیمەیڵی ئەکادیمی" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
-        </div>
-        <button class="action-btn bg-blue" style="margin-top: 15px;">تۆمارکردن</button>
-    </div>
-
-    <div class="selection-card">
-        <h3 class="card-title"><i class="fa-solid fa-calendar-check"></i> بەڕێوەبردنی وەرزەکان</h3>
-        <p style="font-size: 14px; color: #666;">لێرەدا دەتوانیت وەرزەکان زیاد بکەیت یان بە 'چالاک' دیارییان بکەیت بۆ ئەوەی لە سیستەمەکەدا دەربکەون.</p>
-        <div class="btn-group">
-            <button class="select-btn">Fall (2025-2026)</button>
-            <button class="select-btn">Spring (2025-2026)</button>
-            <button class="select-btn" style="border: 2px dashed #2a5298; color: #2a5298;">+ وەرزی نوێ</button>
-        </div>
-    </div>
-</div>
-
     </div>
 
     <script>
-        // فەنکشنی نوێ بۆ گۆڕینی ژوورەکان
         function switchSection(sectionId, element) {
-            // ١. هەموو ژوورەکان بشارەوە
             document.querySelectorAll('.admin-section').forEach(sec => sec.classList.add('hidden'));
-            
-            // ٢. ڕەنگی زەرد (active) لەسەر هەموو دوگمەکانی لای ڕاست لابدە
             document.querySelectorAll('.nav-links li').forEach(li => li.classList.remove('active'));
-            
-            // ٣. ئەو ژوورەی کە دیاریکراوە پیشانی بدە
             document.getElementById(sectionId).classList.remove('hidden');
-            
-            // ٤. ڕەنگە زەردەکە بخەرە سەر ئەو دوگمەیەی کە کلیکت لێکردووە
             element.classList.add('active');
-
-            // ٥. گۆڕینی ناونیشانی سەرەوە
-            const titleText = element.innerText;
-            document.getElementById('page-title').innerText = titleText;
-        }
-
-        // کۆدەکانی پێشوو بۆ بەشی وانەکان
-        function resetGroup(containerId) {
-            const buttons = document.querySelectorAll(`#${containerId} .select-btn`);
-            buttons.forEach(btn => btn.classList.remove('active'));
-        }
-
-        function selectSeason(btn) {
-            resetGroup('season-card');
-            btn.classList.add('active');
-            document.getElementById('stage-card').classList.remove('hidden');
-            document.getElementById('module-card').classList.add('hidden');
-            document.getElementById('action-card').classList.add('hidden');
-            resetGroup('stage-card');
-        }
-
-        function selectStage(btn) {
-            resetGroup('stage-card');
-            btn.classList.add('active');
-            document.getElementById('module-card').classList.remove('hidden');
-            document.getElementById('action-card').classList.add('hidden');
-            resetGroup('module-card');
-        }
-
-        function selectModule(btn) {
-            resetGroup('module-card');
-            btn.classList.add('active');
-            document.getElementById('action-card').classList.remove('hidden');
-            document.getElementById('selected-module-title').innerText = "مۆدیول: " + btn.innerText;
-        }
-
-        function downloadTemplate() {
-            const headers = "Student_ID,Full_Name,Stage,Module_Code,Semester,Attempt_Number,Total_Grade\n";
-            const exampleData = "2019001,ئەحمەد ئازاد,قۆناغی یەکەم,MATH101,Spring (2025-2026),1,85\n";
-            const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + headers + exampleData;
-            
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "Math_Dept_Template.csv");
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        function handleFileUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                alert("فایلەکە وەرگیرا: " + file.name + "\nلە داهاتوودا ئەمە ڕاستەوخۆ دەچێتە ناو داتابەیسەکەوە.");
-            }
+            document.getElementById('page-title').innerText = element.innerText;
         }
     </script>
 </body>
