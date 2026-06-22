@@ -179,10 +179,10 @@
 
         <div class="selection-card" id="season-card">
             <h3 class="card-title"><i class="fa-regular fa-calendar-days"></i> ١. وەرزی خوێندن هەڵبژێرە</h3>
-<div class="btn-group">
-    <button class="select-btn" onclick="selectSeason(this)">پاییز (٢٠٢٥-٢٠٢٦)</button>
-    <button class="select-btn" onclick="selectSeason(this)">بەهار (٢٠٢٥-٢٠٢٦)</button>
-</div>
+            <div class="btn-group">
+                <button class="select-btn" onclick="selectSeason(this)">پاییز (٢٠٢٥-٢٠٢٦)</button>
+                <button class="select-btn" onclick="selectSeason(this)">بەهار (٢٠٢٥-٢٠٢٦)</button>
+            </div>
         </div>
 
         <div class="selection-card hidden" id="stage-card">
@@ -215,6 +215,25 @@
             </div>
         </div>
 
+        <div class="selection-card" style="margin-top: 30px; border-right: 4px solid #28a745;">
+            <h3 class="card-title"><i class="fa-solid fa-file-excel"></i> داخڵکردنی داتای پێشوو (بە کۆمەڵ)</h3>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">
+                سەرەتا فایلی نموونە دابگرە، زانیارییەکانی ساڵانی پێشووی تێدا ڕێکبخە، پاشان لێرەوە بەرزی بکەرەوە بۆ ناو سیستەمەکە.
+            </p>
+            
+            <div class="action-panel">
+                <button class="action-btn bg-green" onclick="downloadTemplate()">
+                    <i class="fa-solid fa-download"></i> داگرتنی فایلی ئامادە
+                </button>
+                
+                <input type="file" id="uploadExcel" accept=".csv" style="display: none;" onchange="handleFileUpload(event)">
+                
+                <button class="action-btn bg-blue" onclick="document.getElementById('uploadExcel').click()">
+                    <i class="fa-solid fa-upload"></i> ئەپڵۆدکردنەوەی فایلەکە
+                </button>
+            </div>
+        </div>
+
     </div>
 
     <script>
@@ -226,9 +245,7 @@
         function selectSeason(btn) {
             resetGroup('season-card');
             btn.classList.add('active');
-            // پیشاندانی بەشی قۆناغ
             document.getElementById('stage-card').classList.remove('hidden');
-            // شاردنەوەی بەشەکانی خوارەوە ئەگەر پێشتر کرابێتنەوە
             document.getElementById('module-card').classList.add('hidden');
             document.getElementById('action-card').classList.add('hidden');
             resetGroup('stage-card');
@@ -237,7 +254,6 @@
         function selectStage(btn) {
             resetGroup('stage-card');
             btn.classList.add('active');
-            // لێرەدا لە داهاتوودا کۆدێک دەکەوێتە کار کە تەنها وانەکانی ئەم قۆناغە لە داتابەیس بهێنێت
             document.getElementById('module-card').classList.remove('hidden');
             document.getElementById('action-card').classList.add('hidden');
             resetGroup('module-card');
@@ -246,9 +262,31 @@
         function selectModule(btn) {
             resetGroup('module-card');
             btn.classList.add('active');
-            // پیشاندانی پانێڵی کردارەکان
             document.getElementById('action-card').classList.remove('hidden');
             document.getElementById('selected-module-title').innerText = "مۆدیول: " + btn.innerText;
+        }
+
+        // فەنکشنی دروستکردن و داونلۆدکردنی فایلی نموونە
+        function downloadTemplate() {
+            const headers = "Student_ID,Full_Name,Stage,Module_Code,Semester,Attempt_Number,Total_Grade\n";
+            const exampleData = "2019001,ئەحمەد ئازاد,قۆناغی یەکەم,MATH101,Spring (2025-2026),1,85\n";
+            const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + headers + exampleData;
+            
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "Math_Dept_Template.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // فەنکشنی کاتی بۆ وەرگرتنی فایلەکە لە کاتی ئەپڵۆدکردندا
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                alert("فایلەکە وەرگیرا: " + file.name + "\nلە داهاتوودا ئەمە ڕاستەوخۆ دەچێتە ناو داتابەیسەکەوە.");
+            }
         }
     </script>
 </body>
