@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پۆرتاڵی بەشی بیرکاری</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            /* بەکارهێنانی فۆنتە نوێیەکە لێرەدا دیاری کراوە */
+            font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-card {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 380px;
+            text-align: center;
+        }
+        .logo-placeholder {
+            width: 90px;
+            height: 90px;
+            background-color: #f0f2f5;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 15px;
+            color: #2a5298;
+            font-size: 40px;
+            border: 2px solid #e1e4e8;
+        }
+        h2 {
+            color: #333;
+            margin: 0 0 5px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        p.subtitle {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .input-group i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+        input {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            text-align: right;
+            background-color: #fafafa;
+        }
+        input:focus {
+            border-color: #2a5298;
+            background-color: #fff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+        .footer-text {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="logo-placeholder">
+        <i class="fa-solid fa-graduation-cap"></i>
+    </div>
+    
+    <h2>زانکۆی ڕاپەڕین</h2>
+    <p class="subtitle">سیستەمی بەڕێوەبردنی بەشی بیرکاری</p>
+
+    <div class="input-group">
+        <i class="fa-solid fa-envelope"></i>
+        <input type="email" id="email" placeholder="ئیمەیڵی ئەکادیمی" required>
+    </div>
+
+    <div class="input-group">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" id="password" placeholder="وشەی تێپەڕ" required>
+    </div>
+
+    <button id="loginBtn">چوونەژوورەوە <i class="fa-solid fa-arrow-left" style="margin-right: 8px;"></i></button>
+    
+    <div id="message"></div>
+
+    <div class="footer-text">
+        وەشانی تاقیکاری - وەرزی بەهار (٢٠٢٥-٢٠٢٦)
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT_ID.appspot.com",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    document.getElementById('loginBtn').addEventListener('click', () => {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const messageDiv = document.getElementById('message');
+
+        messageDiv.innerHTML = "<i class='fa-solid fa-spinner fa-spin'></i> تکایە چاوەڕێ بە...";
+        messageDiv.style.color = "#2a5298";
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                messageDiv.innerHTML = "<i class='fa-solid fa-check-circle'></i> بە سەرکەوتوویی چوویتە ژوورەوە!";
+                messageDiv.style.color = "#28a745";
+            })
+            .catch((error) => {
+                messageDiv.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> هەڵە: ئیمەیڵ یان وشەی تێپەڕ ڕاست نییە.";
+                messageDiv.style.color = "#dc3545";
+            });
+    });
+</script>
+
+</body>
+</html>
